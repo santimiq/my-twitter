@@ -5,8 +5,5 @@
   <%= form.submit "Tweet" %>
 <% end %>
 
-<% @tweets.each do |tweet| %>
-  <div>
-    <%= tweet.body %>
-  </div>
-<% end %>
+<%= render @tweets %>
+
