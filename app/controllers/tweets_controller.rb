@@ -13,12 +13,19 @@ class TweetsController < ApplicationController
     { content: content_from_params }
   end
 
-  def cotent_from_params
-    TextTweet.new(content_params)
+  def content_from_params
+    case params[:tweet][:content_type]
+    when "TextTweet" then TextTweet.create(text_tweet_content_params)
+    when "PhotoTweet" then PhotoTweet.create(photo_tweet_content_params)
+    end
   end
 
-  def content_params
+  def text_tweet_content_params
     params.require(:tweet).require(:content).permit(:body)
+  end
+
+  def photo_tweet_content_params
+    params.require(:tweet).require(:content).permit(:image)
   end
 
   def redirect_options_for(tweet)
