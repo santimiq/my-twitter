@@ -1,7 +1,7 @@
   <div>
+    <%= avatar(tweet.user) %>
     <%= link_to tweet.username,  tweet.user %>
     <%= render tweet.content %>
-
     <%= link_to tweet do %>
       <%= time_ago_in_words(tweet.created_at) %> ago
     <% end %>
