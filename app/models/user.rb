@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def liked?(tweet)
     liked_tweet_ids.include?(tweet.id)
   end
+
+  def to_param
+    username
+  end
 end

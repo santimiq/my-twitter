@@ -3,7 +3,7 @@ class UsersController < Clearance::UsersController
     @user = User.new
   end
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(username:params[:id])
     @tweets = @user.tweets
   end
     private
