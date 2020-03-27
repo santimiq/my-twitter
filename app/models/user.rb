@@ -31,6 +31,10 @@ class User < ApplicationRecord
     followed_users.delete(user)
   end
 
+  def timeline_tweets
+    Tweet.where(user_id: followed_user_ids + [id])
+  end
+
   def like(tweet)
     liked_tweets << tweet
   end
