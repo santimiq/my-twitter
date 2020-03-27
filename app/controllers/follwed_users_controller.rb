@@ -1,0 +1,2 @@
+class FollwedUsersController < ApplicationController
+end
