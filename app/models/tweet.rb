@@ -5,4 +5,5 @@ class Tweet < ApplicationRecord
   validates :user, presence: true
 
   delegate :username, to: :user
+
 end
