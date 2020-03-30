@@ -4,11 +4,26 @@ class TweetSearchQuery
   end
 
   def to_relation
-    Tweet.joins("LEFT JOIN text_tweets ON content_type = 'TextTweet' AND content_id = text_tweets.id").
-    where("text_tweets.body LIKE ?", "%#{term}%")
+    matching_tweets_for_text_tweets.or(matching_tweets_for_photo_tweets)
   end
 
   private
 
   attr_reader :term
+
+  def matching_tweets_for_text_tweets
+    Tweet.where(content_type: "TextTweet", content_id: matching_text_tweets.select(:id))
+  end
+
+  def matching_text_tweets
+        TextTweet.where("body Like ?", "%#{term}%")
+  end
+
+  def matching_tweets_for_photo_tweets
+    Tweet.where(content_type: "PhotoTweet", content_id: matching_photo_tweets.select(:id))
+  end
+
+  def matching_photo_tweets
+    PhotoTweet.where("image_file_name Like ?", "%#{term}%")
+  end
 end
